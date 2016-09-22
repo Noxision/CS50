@@ -1,29 +1,25 @@
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <cs50.h>
 
 int main() {
-    int height;                                             // Переменная, в которую поступает входное число
+    int height;                                             // The variable that contains the input number
 
-    do {                                                    // Проверка входного числа согласно условию задания (1 <= x <= 23)
-        printf("Give me a number between 1 and 23:\n");
-        scanf("%d", &height);
+    do {                                                    // Check the input number
+        printf("height:\n");
+        height = get_int();
     }
-    while(height < 1 || height > 23);
+    while(height < 0 || height > 23 || isdigit(height));
 
-    int i;
-    for( i = 0; i < height; i++){                           // Цикл количества строк (высота полупирамиды)
+    for(int i = 1; i <= height; i++){                        // The loop for number of rows
 
-        int j;
-        for( j = 0; j < height-i; j++)                      // Цикл вывода пробелов в строке
+        for(int j = height - i; j > 0; j--)                  // The loop for number of spaces
             printf(" ");
 
-        int k;
-        for( k = i; k >= 0; k--)                            // Цикл вывода # в строке
+        for(int k = i; k > 0; k--)                           // The loop for output "#"
             printf("#");
 
-        printf("#\n");                                      // Вывод дополнительного # для обеспечения платформы на верху полупирамиды и переход на новую строку
+        printf("#\n");                                       // Output additional sign "#"
     }
-    return 0;
 }
-

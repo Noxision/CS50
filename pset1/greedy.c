@@ -1,42 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-int coins_count (int, int, int, int, int []);
+#include <math.h>
+#include <cs50.h>
+void coins_count (int, int, int, int, int [], int*);
 
 int main() {
-    int array[4] = {[0] = 25, [1] = 10, [2] = 5, [3] = 1}; // Массив с номиналами монет от большего к меньшему
-    float in;                                              // Переменная, в которую поступает входное число
-    int coins = 0;                                         // Переменная, которая будет содержать результат
+    int array[4] = {[0] = 25, [1] = 10, [2] = 5, [3] = 1};  // An array of denominations of coins from highest to lowest
+    float in;                                               // The variable that contains the input number
+    int coins = 0;                                          // The variable that will contain the result
+    int* pointer = &coins;
 
-    do {                                                   // Проверка входного числа на положительный знак
+    do {                                                    // Check the input number
         printf("How much change is owed?\n");
-        scanf("%f", &in);
+        in = get_float();
     }
     while(in <= 0);
 
-    int greedy = in*100;                                   // Преобразовываем число в натуральное
-    int rest = 1;                                          // Переманная, которая содержит в себе остаток от деления (для запуска цикла любое числовое начальное значение != 0)
-    int i = 0;                                             // Переменная для пересчёта ячеек массива
+    int greedy = roundf(in*100);                            // Convert number into natural
+    int rest = 1;                                           // The variable that contains the remainder of the division ( to start the cycle needs any numeric initial value ! = 0 )
+    int i = 0;                                              // The variable for walking through the array in loop
 
-    coins = coins_count (i, rest, greedy, coins, array);   // Вычисляем количество монет
+    coins_count (i, rest, greedy, coins, array, pointer);   // Calculate the number of coins
 
-    /*while(rest != 0){                                    // Цикл в котором происходят основные расчёты
-        rest = greedy%array[i];                            // Получаем остаток от деления
-        coins += (greedy-rest)/array[i];                   // Вычисление количества монет
-        greedy = rest;                                     // Изменение значение входного числа для следующей итерации
-        i++;                                               // Переход к следующей ячейке массива в следующей итерации
-    }*/
-
-    printf("Coins: %d\n", coins);                          // Вывод результата
-    return 0;
+    printf("%d\n", coins);                                  // Output result
 }
 
-int coins_count (int i, int rest, int greedy, int coins, int array[]) {
-    if (rest == 0)
-        return coins;
-    rest = greedy%array[i];                            // Получаем остаток от деления
-    coins += (greedy-rest)/array[i];                   // Вычисление количества монет
-    greedy = rest;                                     // Изменение значение входного числа для следующей итерации
+void coins_count (int i, int rest, int greedy, int coins, int array[], int* pointer) {
+
+    if (rest == 0) {                                        // Condition of the termination
+        *pointer = coins;
+        return;
+    }
+
+    rest = greedy%array[i];                                 // Getting the remainder of the division
+    coins += (greedy-rest)/array[i];                        // Calculating the number of coins
+    greedy = rest;                                          // Changing the value of the input for the next iteration
     i++;
-    //printf("%d, %d, %d", i, rest, coins);
-    coins_count(i, rest, greedy, coins, array);
+    coins_count(i, rest, greedy, coins, array, pointer);
 }

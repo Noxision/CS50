@@ -1,19 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <cs50.h>
 
 int main() {
 
-    int min = 0;                                // Переменная, в которую поступает входное число
-    int bottles = 0;
+    int min = 0, bottles = 0;
 
-    do {                                        // Проверка входного числа
-        printf("Minutes integer:\n");
-        scanf("%d", &min);
-    }
-    while(min < 1);
+    printf("Minutes integer:\n");
+    min = get_int();
 
-    bottles = 192*min/16;                       // Вычисление количества бутылок
+    bottles = 192*min/16;
 
-    printf("Bottles:%d\n", bottles);            // Вывод результата
-    return 0;
+    printf("Bottles:%d\n", bottles);
 }
