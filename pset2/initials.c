@@ -27,7 +27,7 @@ void if_isupper (string text, int i, char initials[], int* place){           // 
     *place += 1;
 }
 
-void to_each_char (string text, char initials[], int* place){                // нахождение первых букв слов разделенных пробелами
+void to_each_char (string text, char initials[], int* place){                // Нахождение первых букв слов разделенных пробелами
     for (int i = 0, n = strlen(text); i < n; i++){
         if (i == 0) {
             if_isupper(text, i, initials, place);
