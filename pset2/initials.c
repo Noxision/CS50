@@ -19,7 +19,7 @@ int main()
     return 0;
 }
 
-void if_isupper (string text, int i, char initials[], int* place){           // «амена мелких букв заглавными
+void if_isupper (string text, int i, char initials[], int* place){           // Replacement of small capital letters
     if (isupper(text[i]))
         initials[*place] = text[i];
     else
@@ -27,7 +27,7 @@ void if_isupper (string text, int i, char initials[], int* place){           // 
     *place += 1;
 }
 
-void to_each_char (string text, char initials[], int* place){                // Ќахождение первых букв слов разделенных пробелами
+void to_each_char (string text, char initials[], int* place){                // Find the first letters of words separated by spaces
     for (int i = 0, n = strlen(text); i < n; i++){
         if (i == 0) {
             if_isupper(text, i, initials, place);
