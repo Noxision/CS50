@@ -2,34 +2,39 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-void if_isupper (char [], int );
-void to_each_char (char []);
+#include <cs50.h>
 
-const int array_size = 100;                     // –азмер вводного массива
+void if_isupper (string, int, char [], int*);
+void to_each_char (string, char [], int*);
 
 int main()
 {
-    char text[array_size];
-    fgets( text, array_size, stdin );           // ¬вод имени
+    string text = get_string();
+    char initials[strlen(text)];
+    int j = 0;
+    int* place = &j;
 
-    to_each_char(text);
+    to_each_char(text, initials, place);
 
     return 0;
 }
 
-void if_isupper (char text[], int i){           // «амена мелких букв заглавными
+void if_isupper (string text, int i, char initials[], int* place){           // «амена мелких букв заглавными
     if (isupper(text[i]))
-        printf("%c", text[i]);
+        initials[*place] = text[i];
     else
-        printf("%c", text[i]-32);
+        initials[*place] = text[i]-32;
+    *place += 1;
 }
 
-void to_each_char (char text[]){                // нахождение первых букв слов разделенных пробелами
-    int i;
-    for (i = 0; i < strlen(text); i++){
-        if (i-1 < 0)
-            if_isupper(text, i);
+void to_each_char (string text, char initials[], int* place){                // нахождение первых букв слов разделенных пробелами
+    for (int i = 0, n = strlen(text); i < n; i++){
+        if (i == 0) {
+            if_isupper(text, i, initials, place);
+            continue;
+        }
         if (!isalpha(text[i-1]))
-            if_isupper(text, i);
+            if_isupper(text, i, initials, place);
     }
+    printf("%s\n", initials);
 }
