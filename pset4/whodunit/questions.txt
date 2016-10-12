@@ -1,0 +1,23 @@
+What’s stdint.h? Библиотека с типами данных 
+
+What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program? выделить переменным разное кличество памяти
+
+How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively? 8 32 32 16
+
+What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers." 0x4d42 символы "BM"
+
+What’s the difference between bfSize and biSize? первое размер файла целиком, второе размер структуры BITMAPINFOHEADER
+
+What does it mean if biHeight is negative? начинает вывод массива рисунка сверху слева
+
+What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)? biBitCount
+
+Why might fopen return NULL in lines 24 and 32 of copy.c? если нет прав на чтение и нет прав на создание нового файла для записи
+
+Why is the third argument to fread always 1 in our code? потому что размером этого файла есть размер целой структура
+
+What value does line 65 of copy.c assign to padding if bi.biWidth is 3? 3 байта
+
+What does fseek do? смещает курсор в файле из которого происходит чтение на длинну байт отступа
+
+What is SEEK_CUR? текущее положение курсора в файле
