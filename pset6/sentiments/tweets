@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import sys
+
+from analyzer import Analyzer
+from termcolor import colored
+from helpers import get_user_timeline
+
+def main():
+
+    # ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("./tweets screen_name")
+
+    twl = get_user_timeline(sys.argv[1], 50)
+
+    def printTweet(score, tweet, color):
+        print(" ", end="")
+        print(colored(score, color), end=" ")
+        print(colored(tweet, color))
+    
+    for tweet in twl:
+        # instantiate analyzer
+        analyzer = Analyzer()
+        
+        # analyze word
+        score = analyzer.analyze(tweet.lower())
+        if score > 0.0:
+            printTweet(score, tweet, "green")
+        elif score < 0.0:
+            printTweet(score, tweet, "red")
+        else:
+            printTweet(score, tweet, "yellow")
+
+if __name__ == "__main__":
+    main()
